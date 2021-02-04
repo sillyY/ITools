@@ -70,10 +70,14 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@electron-forge/plugin-webpack": "6.0.0-beta.54",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@types/antd": "^1.0.0",
     "@types/react": "^17.0.0",
+    "@types/react-color": "^3.0.4",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
+    "@types/rebass": "^4.0.7",
+    "@types/rebass__forms": "^4.0.4",
     "@types/redux-saga": "^0.10.5",
     "@types/styled-components": "^5.1.7",
     "@types/styled-theming": "^2.2.5",
@@ -97,6 +101,7 @@
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
     "styled-theming": "^2.2.0",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "rc-color-picker": "^1.2.6"
   }
 }

@@ -3,6 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <title>ITools</title>
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_2016241_fwsqqdrxrb.css"
+    />
+    <script>
+      if (typeof require !== 'undefined') {
+        window.electron = require('electron')
+      }
+      function setRootRem() {
+        var doc = window.document.documentElement,
+          width = doc.getBoundingClientRect().width,
+          rem = width / (1920 / 100)
+        doc.style.fontSize = rem + 'px'
+      }
+      // setRootRem()
+      window.onresize = function () {
+        // setTimeout(setRootRem(), 300)
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

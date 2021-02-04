@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 import { HashRouter, Route, Redirect } from 'react-router-dom'
-
+import 'antd/dist/antd.css';
 import store from './store'
 
 import Layout from './containers/Layout'
