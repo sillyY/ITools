@@ -8,11 +8,12 @@ import {
   Square,
   Label,
 } from './styled'
-import { Form, InputNumber, Radio, Slider } from 'antd'
+import { Row, Col, Form, InputNumber, Radio, Slider } from 'antd'
 //@ts-ignore
 import ColorPicker from 'rc-color-picker'
 
 import 'rc-color-picker/assets/index.css'
+import { Props } from '../view'
 
 const layout = {
   labelCol: { span: 6 },
@@ -30,13 +31,29 @@ export const enum Direction {
   RightBottom = 'rightBottom',
 }
 
+export const normalDirection = [
+  Direction.Top,
+  Direction.Bottom,
+  Direction.Left,
+  Direction.Right,
+]
+export const specialDirection = [
+  Direction.LeftTop,
+  Direction.RightTop,
+  Direction.LeftBottom,
+  Direction.RightBottom,
+]
+
 export const enum TriangleType {
   Equilateral = 'equilateral',
   Isosceles = 'isosceles',
-  Scalene = 'scalene',
 }
 
-const Setup: React.FC = () => {
+export interface SetupProps extends Props {
+  onChange: (data: Props) => void
+}
+
+const Setup: React.FC<Props> = (props) => {
   const [color, setColor] = useState('#a050f6')
   const [direction, setDirection] = useState(Direction.Top)
   const [type, setType] = useState(TriangleType.Isosceles)
@@ -46,6 +63,19 @@ const Setup: React.FC = () => {
   const triggerChangeDirection = (e: React.ChangeEvent<HTMLInputElement>) =>
     setDirection(e.target.value as Direction)
 
+  const onChange = (value: any, data: any) => {
+    return {
+      borderWidth: setBorderWidthStyle({ ...data, color }),
+      borderColor: setBorderColorStyle({ ...data, color }),
+    }
+  }
+
+  const setBorderWidthStyle = (data: any) => {
+
+  }
+  const setBorderColorStyle = (data: any) => {
+    
+  }
   return (
     <Wrapper>
       <Container>
@@ -58,6 +88,7 @@ const Setup: React.FC = () => {
             angle: 0,
             type: TriangleType.Isosceles,
           }}
+          onValuesChange={onChange}
         >
           <Form.Item name="direction" label="方向">
             <DirectionWrapper>
@@ -162,22 +193,18 @@ const Setup: React.FC = () => {
             <Radio.Group value={type}>
               <Radio value={TriangleType.Equilateral}>等边</Radio>
               <Radio value={TriangleType.Isosceles}>等腰</Radio>
-              <Radio value={TriangleType.Scalene}>不等边</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item name="width" label="宽度">
-            <InputNumber min={0} max={300} step={1} />
-          </Form.Item>
-          <Form.Item >
-            <InputNumber min={0} max={300} step={1} />
+            <Slider min={0} max={300} />
           </Form.Item>
           <Form.Item name="height" label="高度">
-            <InputNumber min={0} max={300} step={1} />
+            <Slider min={0} max={300} />
           </Form.Item>
           <Form.Item name="angle" label="旋转角度">
-            <Slider />
+            <Slider min={0} max={360} />
           </Form.Item>
-          <Form.Item name="bgColor" label="背景色">
+          <Form.Item label="背景色">
             <PickerWrapper>
               <ColorPicker
                 animation="slide-up"

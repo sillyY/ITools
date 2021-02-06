@@ -1,10 +1,15 @@
 import React from 'react'
 import { Wrapper, Container } from './styled'
 
-const View: React.FC = () => {
+export interface Props {
+  borderWidth: string
+  borderColor: string
+}
+
+const View: React.FC<Props> = (props) => {
   return (
     <Wrapper>
-      <Container>View</Container>
+      <Container {...props}></Container>
     </Wrapper>
   )
 }
