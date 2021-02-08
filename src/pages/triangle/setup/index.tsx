@@ -13,7 +13,7 @@ import { Row, Col, Form, InputNumber, Radio, Slider } from 'antd'
 import ColorPicker from 'rc-color-picker'
 
 import 'rc-color-picker/assets/index.css'
-import { Props } from '../view'
+import { State } from '..'
 
 const layout = {
   labelCol: { span: 6 },
@@ -49,14 +49,16 @@ export const enum TriangleType {
   Isosceles = 'isosceles',
 }
 
-export interface SetupProps extends Props {
-  onChange: (data: Props) => void
+export interface Props {
+  state: State
+  onChange: (state: State) => void
 }
 
 const Setup: React.FC<Props> = (props) => {
-  const [color, setColor] = useState('#a050f6')
-  const [direction, setDirection] = useState(Direction.Top)
-  const [type, setType] = useState(TriangleType.Isosceles)
+  const [color, setColor] = useState(props.state.color)
+  const [direction, setDirection] = useState(props.state.direction)
+  const [type, setType] = useState(props.state.type)
+  const [form] = Form.useForm()
 
   const setActiveCls = (dir: Direction) => (dir === direction ? 'active' : '')
 
@@ -64,32 +66,12 @@ const Setup: React.FC<Props> = (props) => {
     setDirection(e.target.value as Direction)
 
   const onChange = (value: any, data: any) => {
-    return {
-      borderWidth: setBorderWidthStyle({ ...data, color }),
-      borderColor: setBorderColorStyle({ ...data, color }),
-    }
-  }
-
-  const setBorderWidthStyle = (data: any) => {
-
-  }
-  const setBorderColorStyle = (data: any) => {
-    
+    props.onChange({...data,color})
   }
   return (
     <Wrapper>
       <Container>
-        <Form
-          {...layout}
-          initialValues={{
-            direction: Direction.Top,
-            width: 20,
-            height: 20,
-            angle: 0,
-            type: TriangleType.Isosceles,
-          }}
-          onValuesChange={onChange}
-        >
+        <Form {...layout} initialValues={props.state} onValuesChange={onChange}>
           <Form.Item name="direction" label="方向">
             <DirectionWrapper>
               <Placeholder />
